@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Thuyết trình</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: "Segoe UI", sans-serif;
+        background: #111;
+        color: #fff;
+        overflow: hidden;
+      }
+      .slide {
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        text-align: center;
+        transition: transform 0.8s ease;
+      }
+      h1,
+      h2,
+      p {
+        margin: 10px;
+      }
+      .container {
+        display: flex;
+        transition: transform 0.8s ease;
+        width: 100%;
+        height: 100%;
+      }
+      .nav-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 2rem;
+        background: rgba(255, 255, 255, 0.2);
+        border: none;
+        padding: 10px;
+        color: white;
+        cursor: pointer;
+        border-radius: 10px;
+      }
+      #prevBtn {
+        left: 20px;
+      }
+      #nextBtn {
+        right: 20px;
+      }
+      .slide1 {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+      }
+      .slide2 {
+        background: linear-gradient(135deg, #ff9966, #ff5e62);
+      }
+      .slide3 {
+        background: linear-gradient(135deg, #11998e, #38ef7d);
+      }
+      .slide4 {
+        background: linear-gradient(135deg, #fc6076, #ff9a44);
+      }
+      .footer {
+        position: absolute;
+        bottom: 15px;
+        width: 100%;
+        text-align: center;
+        font-size: 0.9rem;
+        opacity: 0.7;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container" id="slides">
+      <section class="slide slide1">
+        <h1>Chào mừng đến với bài thuyết trình</h1>
+        <p>Ấn tượng ngay từ cái nhìn đầu tiên ✨</p>
+      </section>
+      <section class="slide slide2">
+        <h2>Nội dung chính</h2>
+        <p>1. Giới thiệu<br />2. Phân tích<br />3. Giải pháp</p>
+      </section>
+      <section class="slide slide3">
+        <h2>Điểm nổi bật</h2>
+        <p>
+          - Thiết kế hiện đại<br />- Hiệu ứng mượt mà<br />- Tạo ấn tượng mạnh
+          mẽ
+        </p>
+      </section>
+      <section class="slide slide4">
+        <h2>Kết luận</h2>
+        <p>Cảm ơn thầy/cô và các bạn đã lắng nghe 🙏</p>
+      </section>
+    </div>
+
+    <button class="nav-btn" id="prevBtn">⟨</button>
+    <button class="nav-btn" id="nextBtn">⟩</button>
+
+    <div class="footer">Trình chiếu bằng HTML, CSS & JavaScript</div>
+
+    <script>
+      const slides = document.getElementById("slides");
+      const totalSlides = document.querySelectorAll(".slide").length;
+      let currentIndex = 0;
+
+      function updateSlide() {
+        slides.style.transform = `translateX(-${currentIndex * 100}vw)`;
+      }
+
+      document.getElementById("nextBtn").addEventListener("click", () => {
+        if (currentIndex < totalSlides - 1) currentIndex++;
+        updateSlide();
+      });
+
+      document.getElementById("prevBtn").addEventListener("click", () => {
+        if (currentIndex > 0) currentIndex--;
+        updateSlide();
+      });
+
+      // Điều khiển bằng phím mũi tên
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "ArrowRight") {
+          if (currentIndex < totalSlides - 1) currentIndex++;
+          updateSlide();
+        } else if (e.key === "ArrowLeft") {
+          if (currentIndex > 0) currentIndex--;
+          updateSlide();
+        }
+      });
+    </script>
+  </body>
+</html>
