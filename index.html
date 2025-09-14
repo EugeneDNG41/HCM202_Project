@@ -12,27 +12,40 @@
         color: #fff;
         overflow: hidden;
       }
+      .container {
+        display: flex;
+        transition: transform 0.8s ease;
+        height: 100vh;
+        width: 100vw; /* sẽ cập nhật bằng JS */
+      }
       .slide {
-        width: 100vw;
+        flex: 0 0 100vw; /* mỗi slide chiếm 1 màn hình */
         height: 100vh;
         display: flex;
         align-items: center;
         justify-content: center;
         flex-direction: column;
         text-align: center;
-        transition: transform 0.8s ease;
+        padding: 40px;
+        box-sizing: border-box;
       }
       h1,
       h2,
       p {
         margin: 10px;
       }
-      .container {
-        display: flex;
-        transition: transform 0.8s ease;
-        width: 100%;
-        height: 100%;
+
+      /* Background */
+      .slide1 {
+        background: linear-gradient(135deg, #667eea, #764ba2);
       }
+      .slide2 {
+        background: linear-gradient(135deg, #ff9966, #ff5e62);
+      }
+      .slide3 {
+        background: linear-gradient(135deg, #11998e, #38ef7d);
+      }
+
       .nav-btn {
         position: absolute;
         top: 50%;
@@ -51,18 +64,6 @@
       #nextBtn {
         right: 20px;
       }
-      .slide1 {
-        background: linear-gradient(135deg, #667eea, #764ba2);
-      }
-      .slide2 {
-        background: linear-gradient(135deg, #ff9966, #ff5e62);
-      }
-      .slide3 {
-        background: linear-gradient(135deg, #11998e, #38ef7d);
-      }
-      .slide4 {
-        background: linear-gradient(135deg, #fc6076, #ff9a44);
-      }
       .footer {
         position: absolute;
         bottom: 15px;
@@ -75,24 +76,51 @@
   </head>
   <body>
     <div class="container" id="slides">
+      <!-- Slide 1 -->
       <section class="slide slide1">
         <h1>Chào mừng đến với bài thuyết trình</h1>
         <p>Ấn tượng ngay từ cái nhìn đầu tiên ✨</p>
-      </section>
-      <section class="slide slide2">
         <h2>Nội dung chính</h2>
         <p>1. Giới thiệu<br />2. Phân tích<br />3. Giải pháp</p>
-      </section>
-      <section class="slide slide3">
         <h2>Điểm nổi bật</h2>
-        <p>
-          - Thiết kế hiện đại<br />- Hiệu ứng mượt mà<br />- Tạo ấn tượng mạnh
-          mẽ
-        </p>
-      </section>
-      <section class="slide slide4">
+        <p>- Thiết kế hiện đại<br />- Hiệu ứng mượt mà<br />- Tạo ấn tượng mạnh mẽ</p>
         <h2>Kết luận</h2>
         <p>Cảm ơn thầy/cô và các bạn đã lắng nghe 🙏</p>
+      </section>
+
+      <!-- Slide 2 -->
+      <section class="slide slide2">
+        <h2>II.1. Tư tưởng Hồ Chí Minh về chủ nghĩa xã hội</h2>
+        <p>
+          Quan niệm của Hồ Chí Minh về chủ nghĩa xã hội:<br /><br />
+          Theo Hồ Chí Minh: “Nói một cách tóm tắt, mộc mạc, chủ nghĩa xã hội
+          trước hết nhằm làm cho nhân dân lao động thoát nạn bần cùng, làm cho
+          mọi người có công ăn việc làm, được ấm no và sống một đời hạnh phúc”.
+          <br /><br />
+          Hồ Chí Minh khẳng định: “Tiến lên chủ nghĩa xã hội là bước phát triển
+          tất yếu ở Việt Nam sau khi nước nhà đã giành được độc lập theo con
+          đường cách mạng vô sản”. <br /><br />
+          Tất yếu bởi các lý do sau: <br />
+          - Phù hợp với xu thế phát triển của thời đại. <br />
+          - Phù hợp nguyện vọng của đại đa số nhân dân lao động. <br />
+          - Bảo vệ được thành quả của cách mạng Việt Nam.
+        </p>
+      </section>
+
+      <!-- Slide 3 -->
+      <section class="slide slide3">
+        <h2>II.2. Một số đặc trưng cơ bản của xã hội XHCN</h2>
+        <p>
+          - <b>Về chính trị:</b> Xã hội XHCN là xã hội do nhân dân làm chủ. <br />
+          - <b>Về kinh tế:</b> Xã hội XHCN là xã hội có nền kinh tế phát triển cao
+          dựa trên lực lượng sản xuất hiện đại và chế độ công hữu về tư liệu sản
+          xuất chủ yếu. <br />
+          - <b>Về văn hóa, đạo đức và các quan hệ xã hội:</b> Xã hội XHCN có trình
+          độ phát triển cao về văn hoá và đạo đức, bảo đảm sự công bằng, hợp lý
+          trong các quan hệ xã hội. <br />
+          - <b>Về chủ thể xây dựng:</b> Chủ nghĩa xã hội là công trình tập thể của
+          nhân dân dưới sự lãnh đạo của Đảng Cộng sản.
+        </p>
       </section>
     </div>
 
@@ -105,6 +133,9 @@
       const slides = document.getElementById("slides");
       const totalSlides = document.querySelectorAll(".slide").length;
       let currentIndex = 0;
+
+      // cập nhật chiều rộng container
+      slides.style.width = `${totalSlides * 100}vw`;
 
       function updateSlide() {
         slides.style.transform = `translateX(-${currentIndex * 100}vw)`;
@@ -120,7 +151,7 @@
         updateSlide();
       });
 
-      // Điều khiển bằng phím mũi tên
+      // điều khiển bằng phím
       document.addEventListener("keydown", (e) => {
         if (e.key === "ArrowRight") {
           if (currentIndex < totalSlides - 1) currentIndex++;
